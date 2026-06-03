@@ -1,18 +1,21 @@
-import { PrismaClient } from './generated/prisma/client' // Ensure this relative path correctly points to the 'generated' folder from THIS file
+import { PrismaClient } from "../prisma/generated/prisma/client";
+import {Pool} from "pg"
+import {PrismaPg} from "@prisma/adapter-pg"
 
-const prismaClientSingleton = () => {
-  return new PrismaClient({
-    log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
-  })
+const globalForPrisma = globalThis as unknown as {
+  prisma:PrismaClient | undefined
 }
 
-// Cleaner, safer way to declare the global type without using ReturnType on a function block directly
-declare global {
-  var prismaGlobal: PrismaClient | undefined;
+const pool = new Pool({
+  connectionString:process.env.DATABASE_URL
+})
+
+const adapter = new PrismaPg(pool)
+
+export const prisma = globalForPrisma.prisma ?? new PrismaClient({
+  adapter:adapter
+})
+
+if(process.env.NODE_ENV !== "production"){
+  globalForPrisma.prisma = prisma
 }
-
-const db = globalThis.prismaGlobal ?? prismaClientSingleton()
-
-export default db
-
-if (process.env.NODE_ENV !== 'production') globalThis.prismaGlobal = db
