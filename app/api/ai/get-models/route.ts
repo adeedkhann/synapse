@@ -31,7 +31,7 @@ export async function GET(request:NextRequest) {
             description:model.description,
             context_length:model.context_length,
             architecture:model.architecture,
-            Pricing:model.pricing,
+            pricing:model.pricing,
             top_provider:model.top_provider
         }))
 

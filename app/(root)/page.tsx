@@ -4,6 +4,7 @@ import {UserButton} from "@/modules/authentication/components/userButton"
 import { authClient } from "@/lib/auth-client";
 import { currentUser } from "@/modules/authentication/actions";
 import ChatSidebar from "@/modules/chat/components/chat-sidebar";
+import ChatMessageView from "@/modules/chat/components/chat-view/chat-message-view";
 
 
 
