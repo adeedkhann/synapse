@@ -69,12 +69,6 @@ const selectedModel = useMemo(
       model: selectedModel,
     });
 
-    // TODO:
-    // mutate({
-    //   content: message,
-    //   modelId: selectedModelId
-    // })
-
     setMessage("");
   };
 

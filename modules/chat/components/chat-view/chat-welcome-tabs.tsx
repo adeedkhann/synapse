@@ -1,64 +1,61 @@
 "use client";
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-    const data = [
+const data = [
   {
-    "tab": "Create",
-    "icon": "sparkles",
-    "prompts": [
+    tab: "Create",
+    icon: "sparkles",
+    prompts: [
       "Write a short story about a robot discovering emotions",
       "Help me outline a sci-fi novel set in a post-apocalyptic world",
       "Create a character profile for a complex villain with sympathetic motives",
-      "Give me 5 creative writing prompts for flash fiction"
-    ]
+      "Give me 5 creative writing prompts for flash fiction",
+    ],
   },
   {
-    "tab": "Explore",
-    "icon": "compass",
-    "prompts": [
+    tab: "Explore",
+    icon: "compass",
+    prompts: [
       "Explain the concept of quantum computing using a simple analogy",
       "What are the most interesting historical facts about ancient civilizations?",
       "Recommend top travel destinations for hiking and outdoor photography",
-      "Summarize the major philosophical differences between Stoicism and Epicureanism"
-    ]
+      "Summarize the major philosophical differences between Stoicism and Epicureanism",
+    ],
   },
   {
-    "tab": "Code",
-    "icon": "code",
-    "prompts": [
+    tab: "Code",
+    icon: "code",
+    prompts: [
       "Write a TypeScript function to deeply clone a nested object",
       "How do I set up custom middleware in a Next.js App Router project?",
       "Debug this SQL query performance issue and suggest indexes",
-      "Explain the difference between useEffect and useLayoutEffect in React"
-    ]
+      "Explain the difference between useEffect and useLayoutEffect in React",
+    ],
   },
   {
-    "tab": "Learn",
-    "icon": "academic-cap",
-    "prompts": [
+    tab: "Learn",
+    icon: "academic-cap",
+    prompts: [
       "Give me a 4-week study plan to learn the basics of linear algebra",
       "How does the human immune system recognize and fight off new viruses?",
       "Explain macroeconomics principles and how inflation affects interest rates",
-      "Walk me through the step-by-step process of cell division (Mitosis)"
-    ]
-  }
-]
+      "Walk me through the step-by-step process of cell division (Mitosis)",
+    ],
+  },
+];
 
-
-const ChatWelcomeTabs = ({username="adeed khan" , onMessageSelect}) => {
-
-const [activeTab, setActiveTab] = useState('Create');
+const ChatWelcomeTabs = ({ username = "adeed khan", onMessageSelect }) => {
+  const [activeTab, setActiveTab] = useState("Create");
 
   // Find prompts for the currently active tab
   const activePromptData = data.find((item) => item.tab === activeTab);
 
-return (
-  <div className="w-full max-w-[720px] mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="flex flex-col items-center gap-4 sm:gap-6">
-      
-      {/* Heading */}
-      <h1
-        className="
+  return (
+    <div className="w-full max-w-[720px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex flex-col items-center gap-4 sm:gap-6">
+        {/* Heading */}
+        <h1
+          className="
           text-center
           font-bold
           tracking-tight
@@ -69,13 +66,13 @@ return (
           md:text-4xl
           transition-colors
         "
-      >
-        How can I help you?
-      </h1>
+        >
+          How can I help you?
+        </h1>
 
-      {/* Tabs */}
-      <div
-        className="
+        {/* Tabs */}
+        <div
+          className="
           flex
           flex-wrap
           justify-center
@@ -83,15 +80,15 @@ return (
           sm:gap-3
           w-full
         "
-      >
-        {data.map((item) => {
-          const isActive = activeTab === item.tab;
+        >
+          {data.map((item) => {
+            const isActive = activeTab === item.tab;
 
-          return (
-            <button
-              key={item.tab}
-              onClick={() => setActiveTab(item.tab)}
-              className={`
+            return (
+              <button
+                key={item.tab}
+                onClick={() => setActiveTab(item.tab)}
+                className={`
                 whitespace-nowrap
                 rounded-full
                 border
@@ -127,19 +124,19 @@ return (
                     `
                 }
               `}
-            >
-              {item.tab}
-            </button>
-          );
-        })}
-      </div>
+              >
+                {item.tab}
+              </button>
+            );
+          })}
+        </div>
 
-      {/* Prompt Cards */}
-      <div className="w-full space-y-2 sm:space-y-3">
-        {activePromptData?.prompts.map((prompt, index) => (
-          <button
-            key={index}
-            className="
+        {/* Prompt Cards */}
+        <div className="w-full space-y-2 sm:space-y-3">
+          {activePromptData?.prompts.map((prompt, index) => (
+            <button
+              key={index}
+              className="
               w-full
               text-left
               rounded-2xl
@@ -168,13 +165,13 @@ return (
               dark:hover:bg-zinc-800/40
               dark:shadow-none
             "
-          >
-            {prompt}
-          </button>
-        ))}
+            >
+              {prompt}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-);
-}
-export default ChatWelcomeTabs
+  );
+};
+export default ChatWelcomeTabs;

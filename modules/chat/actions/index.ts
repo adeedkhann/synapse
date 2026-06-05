@@ -94,9 +94,9 @@ export async function getChatById(chatId:string) {
         }
 
 
-       const chat = await prisma.chat.findUnique({
+       const chat = await prisma.chat.findFirst({
         where:{id:chatId,userId:user?.id},
-        include:{message:true}
+        include:{messages:true}
        })
 
        if(!chat){

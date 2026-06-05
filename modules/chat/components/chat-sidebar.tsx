@@ -115,9 +115,12 @@ const handleDelete = (e:React.MouseEvent ,chatId:string)=>{
 
   return (
     <div className="flex h-full flex-col bg-background">
+      
       {/* New Chat */}
       <div className="p-3">
+        
         <Button
+
           variant="secondary"
           className={`w-full ${
             collapsed ? "justify-center px-0" : "justify-start gap-2"
@@ -251,6 +254,7 @@ const ChatSidebar = ({
       <div className="fixed left-3 top-3 z-50 md:hidden">
         <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
           <SheetTrigger asChild>
+            
             <Button
               variant="outline"
               size="icon"

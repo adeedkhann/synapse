@@ -6,7 +6,7 @@ export const useAiModels = ()=>{
 
     return useQuery({
         queryKey:["ai-models"],
-        queryFn:()=> fetch("api/ai/get-models").then(res=>res.json())
+        queryFn:()=> fetch("/api/ai/get-models").then(res=>res.json())
     })
 
 

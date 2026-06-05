@@ -43,9 +43,7 @@ const ModelSelector = ({
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [selectedForDetails, setSelectedForDetails] = useState(null);
 
-  const selectedModel = models.find(
-    (model) => model.id === selectedModelId
-  );
+  const selectedModel = models.find((model) => model.id === selectedModelId);
 
   const formatContextLength = (length) => {
     if (!length) return "-";
@@ -69,23 +67,20 @@ const ModelSelector = ({
     );
   };
 
-  const freeModels = useMemo(
-    () => models.filter(isFreeModel),
-    [models]
-  );
+  const freeModels = useMemo(() => models.filter(isFreeModel), [models]);
 
   const paidModels = useMemo(
     () => models.filter((m) => !isFreeModel(m)),
-    [models]
+    [models],
   );
 
   return (
     <>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-  <Button
-    variant="ghost"
-    className={`
+          <Button
+            variant="ghost"
+            className={`
       h-9
       w-full sm:w-auto
       max-w-[180px] sm:max-w-none
@@ -103,36 +98,34 @@ const ModelSelector = ({
       dark:hover:bg-zinc-800
       ${className}
     `}
-  >
-    <span className="truncate">
-      {selectedModel?.name || "Select Model"}
-    </span>
+          >
+            <span className="truncate">
+              {selectedModel?.name || "Select Model"}
+            </span>
 
-    <ChevronDown className="ml-1.5 h-4 w-4 shrink-0 opacity-60" />
-  </Button>
-</PopoverTrigger>
+            <ChevronDown className="ml-1.5 h-4 w-4 shrink-0 opacity-60" />
+          </Button>
+        </PopoverTrigger>
 
         <PopoverContent
-  align="center"
-  sideOffset={8}
-  className="
+          align="center"
+          sideOffset={8}
+          className="
     w-[95vw]
     sm:w-[380px]
     p-0
     border-zinc-200
     dark:border-zinc-800
   "
->
+        >
           <Command>
             <CommandInput
-  placeholder="Search models..."
-  className="h-12 text-base"
-/>
+              placeholder="Search models..."
+              className="h-12 text-base"
+            />
 
             <CommandList className="max-h-[60vh] sm:max-h-[400px]">
-              <CommandEmpty>
-                No models found.
-              </CommandEmpty>
+              <CommandEmpty>No models found.</CommandEmpty>
 
               {freeModels.length > 0 && (
                 <CommandGroup heading="Free Models">
@@ -153,13 +146,10 @@ const ModelSelector = ({
                     >
                       <div className="flex w-full items-center justify-between">
                         <div className="flex flex-col">
-                          <span className="font-medium">
-                            {model.name}
-                          </span>
+                          <span className="font-medium">{model.name}</span>
 
                           <span className="text-xs text-muted-foreground">
-                            {model.provider?.name ||
-                              model.top_provider?.name}
+                            {model.provider?.name || model.top_provider?.name}
                           </span>
                         </div>
 
@@ -220,7 +210,7 @@ const ModelSelector = ({
                         onModelSelect(model.id);
                         setOpen(false);
                       }}
-                       className="
+                      className="
     group
     min-h-[52px]
     py-2
@@ -232,8 +222,7 @@ const ModelSelector = ({
                           <span>{model.name}</span>
 
                           <span className="text-xs text-muted-foreground">
-                            {model.provider?.name ||
-                              model.top_provider?.name}
+                            {model.provider?.name || model.top_provider?.name}
                           </span>
                         </div>
 
@@ -266,11 +255,9 @@ const ModelSelector = ({
         </PopoverContent>
       </Popover>
 
-      <Dialog
-        open={detailsOpen}
-        onOpenChange={setDetailsOpen}
-      >
-        <DialogContent  className="
+      <Dialog open={detailsOpen} onOpenChange={setDetailsOpen}>
+        <DialogContent
+          className="
     w-[95vw]
     max-w-lg
     max-h-[85vh]
@@ -278,11 +265,10 @@ const ModelSelector = ({
     rounded-2xl
     p-4
     sm:p-6
-  ">
+  "
+        >
           <DialogHeader>
-            <DialogTitle>
-              {selectedForDetails?.name}
-            </DialogTitle>
+            <DialogTitle>{selectedForDetails?.name}</DialogTitle>
           </DialogHeader>
 
           {selectedForDetails && (
@@ -290,26 +276,18 @@ const ModelSelector = ({
               <div className="rounded-xl border p-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                   <div>
-                    <p className="text-muted-foreground">
-                      Context
-                    </p>
+                    <p className="text-muted-foreground">Context</p>
 
                     <p className="text-sm leading-6 text-muted-foreground">
-                      {formatContextLength(
-                        selectedForDetails.context_length
-                      )}
+                      {formatContextLength(selectedForDetails.context_length)}
                     </p>
                   </div>
 
                   <div>
-                    <p className="text-muted-foreground">
-                      Pricing
-                    </p>
+                    <p className="text-muted-foreground">Pricing</p>
 
                     <p className="font-medium">
-                      {isFreeModel(selectedForDetails)
-                        ? "Free"
-                        : "Paid"}
+                      {isFreeModel(selectedForDetails) ? "Free" : "Paid"}
                     </p>
                   </div>
                 </div>
