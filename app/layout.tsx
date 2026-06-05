@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/Providers/theme-provider";
 import { QueryProvider } from "@/components/Providers/query-provider";
+import { Toaster } from "sonner";
 
 const jetbrainsMonoHeading = JetBrains_Mono({subsets:['latin'],variable:'--font-heading'});
 
@@ -45,6 +46,7 @@ export default function RootLayout({
           >
 
             {children}
+            <Toaster/>
           </ThemeProvider>
         </QueryProvider>
         </body>

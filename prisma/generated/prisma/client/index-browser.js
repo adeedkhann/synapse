@@ -171,6 +171,26 @@ exports.Prisma.VerificationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ChatScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  model: 'model',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MessageScalarFieldEnum = {
+  id: 'id',
+  messageRole: 'messageRole',
+  messageType: 'messageType',
+  content: 'content',
+  model: 'model',
+  chatId: 'chatId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -185,14 +205,25 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.MessageRole = exports.$Enums.MessageRole = {
+  USER: 'USER',
+  ASSISTANT: 'ASSISTANT'
+};
 
+exports.MessageType = exports.$Enums.MessageType = {
+  NORMAL: 'NORMAL',
+  ERROR: 'ERROR',
+  TOOL_CALL: 'TOOL_CALL'
+};
 
 exports.Prisma.ModelName = {
   Test: 'Test',
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  Chat: 'Chat',
+  Message: 'Message'
 };
 
 /**

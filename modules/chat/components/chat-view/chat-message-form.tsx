@@ -10,6 +10,9 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { useAiModels } from "../../hooks/use-ai-models";
 import ModelSelector from "./model-selector";
+import { useCreateChat } from "../../hooks/use-chats";
+import { toast } from "sonner";
+import { Spinner } from "@/components/ui/spinner";
 
 const ChatMessageForm = ({
   initialMessage,
@@ -43,8 +46,22 @@ const selectedModel = useMemo(
     onMessageChange?.();
   };
 
-  const handleSubmit = () => {
+  const {mutateAsync , isPending:isChatPending} = useCreateChat();
+  const handleSubmit = async(e) => {
+
     if (!message.trim()) return;
+
+    try {
+      e.preventDefault();
+      await mutateAsync({content:message , model:selectedModel.id})
+      toast.success("message sent succesfully")
+    } catch (error) {
+      console.error("fails to sent message");
+      toast.error("failed to sene message")
+    }finally{
+      setMessage("")
+    }
+
 
     console.log({
       message,
@@ -122,7 +139,7 @@ const selectedModel = useMemo(
         <Button
           size="icon"
           onClick={handleSubmit}
-          disabled={!message.trim() || isPending}
+          disabled={!message.trim() || isChatPending}
           className="
             h-9
             w-9
@@ -142,7 +159,7 @@ const selectedModel = useMemo(
             shrink-0
           "
         >
-          <ArrowUp className="h-4 w-4" />
+          {isChatPending? (<Spinner/>): (<ArrowUp className="h-4 w-4" />)}
         </Button>
       </div>
     </div>
