@@ -8,7 +8,7 @@ import ChatMessageView from "@/modules/chat/components/chat-view/chat-message-vi
 
 
 
-export const user = await currentUser()
+const user = await currentUser()
 export default async function Home() {
 
   return (
