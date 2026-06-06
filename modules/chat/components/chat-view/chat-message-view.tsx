@@ -4,10 +4,14 @@ import React, { useState } from "react";
 import ChatWelcomeTabs from "./chat-welcome-tabs";
 import ChatMessageForm from "./chat-message-form";
 
-const ChatMessageView = ({ user }) => {
+interface ChatMessageViewProps {
+  user?: { name?: string | null; image?: string | null; email?: string | null } | null;
+}
+
+const ChatMessageView = ({ user }: ChatMessageViewProps) => {
   const [selectedMessage, setSelectedMessage] = useState("");
 
-  const handleMessageSelect = (message) => {
+  const handleMessageSelect = (message: string) => {
     setSelectedMessage(message);
   };
 
@@ -40,7 +44,7 @@ const ChatMessageView = ({ user }) => {
         "
       >
         <ChatWelcomeTabs
-          username={user?.name}
+          username={user?.name ?? undefined}
           onMessageSelect={handleMessageSelect}
         />
       </div>

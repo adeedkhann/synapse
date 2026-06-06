@@ -44,7 +44,12 @@ const data = [
   },
 ];
 
-const ChatWelcomeTabs = ({ username = "adeed khan", onMessageSelect }) => {
+interface ChatWelcomeTabsProps {
+  username?: string;
+  onMessageSelect: (message: string) => void;
+}
+
+const ChatWelcomeTabs = ({ username = "adeed khan", onMessageSelect }: ChatWelcomeTabsProps) => {
   const [activeTab, setActiveTab] = useState("Create");
 
   // Find prompts for the currently active tab

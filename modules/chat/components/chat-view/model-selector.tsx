@@ -33,19 +33,41 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+interface AIModel {
+  id: string;
+  name: string;
+  description?: string;
+  context_length?: number;
+  architecture?: any;
+  pricing?: {
+    prompt?: string;
+    completion?: string;
+    request?: string;
+  };
+  provider?: { name?: string };
+  top_provider?: { name?: string };
+}
+
+interface ModelSelectorProps {
+  models?: AIModel[];
+  selectedModelId: string;
+  onModelSelect: (id: string) => void;
+  className?: string;
+}
+
 const ModelSelector = ({
   models = [],
   selectedModelId,
   onModelSelect,
   className,
-}) => {
+}: ModelSelectorProps) => {
   const [open, setOpen] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(false);
-  const [selectedForDetails, setSelectedForDetails] = useState(null);
+  const [selectedForDetails, setSelectedForDetails] = useState<AIModel | null>(null);
 
   const selectedModel = models.find((model) => model.id === selectedModelId);
 
-  const formatContextLength = (length) => {
+  const formatContextLength = (length: number | undefined) => {
     if (!length) return "-";
 
     if (length >= 1000000) {
@@ -59,7 +81,7 @@ const ModelSelector = ({
     return length.toString();
   };
 
-  const isFreeModel = (model) => {
+  const isFreeModel = (model: AIModel) => {
     return (
       model?.pricing?.prompt === "0" &&
       model?.pricing?.completion === "0" &&

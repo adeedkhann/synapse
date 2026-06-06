@@ -39,7 +39,7 @@ import {
 } from "@/components/ai-elements/reasoning";
 import { toast } from "sonner";
 
-function parseMessageToUI(msg) {
+function parseMessageToUI(msg: any) {
   const basePart = { type: "text", text: msg.content };
 
   try {
@@ -104,7 +104,7 @@ function MessagePart({ part, messageId, partIndex, role ,isStreaming}:{
       >
         <ReasoningTrigger />
         <ReasoningContent className="mt-1 italic font-light text-muted-foreground">
-          {part.text}
+          {part.text ?? ""}
         </ReasoningContent>
       </Reasoning>
     );
@@ -333,7 +333,7 @@ const ChatView = ({
                     ) : (
                       <ModelSelector
                         models={modelsData?.models ?? []}
-                        selectedModelId={selectedModel}
+                        selectedModelId={selectedModel ?? ""}
                         onModelSelect={setSelectedModel}
                         className=""
                       />

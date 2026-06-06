@@ -19,13 +19,13 @@ export async function GET(request:NextRequest) {
 
         const data = await response.json();
 
-        const freeModels = data.data.filter(model=>{
+        const freeModels = data.data.filter((model: any)=>{
             const promptPrice = parseFloat(model.pricing?.prompt || "0");
             const completionPrice = parseFloat(model.pricing?.completion || "0")
 
             return promptPrice === 0 && completionPrice ===0;
         })
-        const formattedModels = freeModels.map((model)=>({
+        const formattedModels = freeModels.map((model: any)=>({
             id:model.id,
             name:model.name,
             description:model.description,
@@ -42,7 +42,8 @@ export async function GET(request:NextRequest) {
 
 
     } catch (error) {
-        
+        console.error("Error fetching models:", error);
+        return NextResponse.json({message: "Internal server error"}, {status: 500});
     }
 
 

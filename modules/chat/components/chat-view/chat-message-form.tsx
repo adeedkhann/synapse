@@ -14,10 +14,15 @@ import { useCreateChat } from "../../hooks/use-chats";
 import { toast } from "sonner";
 import { Spinner } from "@/components/ui/spinner";
 
+interface ChatMessageFormProps {
+  initialMessage?: string;
+  onMessageChange?: (msg?: string) => void;
+}
+
 const ChatMessageForm = ({
   initialMessage,
   onMessageChange,
-}) => {
+}: ChatMessageFormProps) => {
   const { data, isPending } = useAiModels();
 
 const models = data?.models ?? [];
@@ -39,16 +44,16 @@ const models = data?.models ?? [];
   }, [models, selectedModelId]);
 
 const selectedModel = useMemo(
-  () => models.find((model) => model.id === selectedModelId),
+  () => models.find((model: any) => model.id === selectedModelId),
   [models, selectedModelId]
 );
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
     onMessageChange?.();
   };
 
   const {mutateAsync , isPending:isChatPending} = useCreateChat();
-  const handleSubmit = async(e) => {
+  const handleSubmit = async(e: React.MouseEvent<HTMLButtonElement>) => {
 
     if (!message.trim()) return;
 
