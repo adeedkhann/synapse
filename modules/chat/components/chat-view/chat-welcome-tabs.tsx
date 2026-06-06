@@ -136,6 +136,7 @@ const ChatWelcomeTabs = ({ username = "adeed khan", onMessageSelect }) => {
           {activePromptData?.prompts.map((prompt, index) => (
             <button
               key={index}
+              onClick={() => onMessageSelect(prompt)}
               className="
               w-full
               text-left

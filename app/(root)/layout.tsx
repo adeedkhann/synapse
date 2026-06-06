@@ -1,4 +1,3 @@
-import { ModeToggle } from '@/components/mode-toggle'
 import { requiresAuth } from '@/modules/authentication/actions'
 import { getAllChats } from '@/modules/chat/actions'
 import ChatSidebar from '@/modules/chat/components/chat-sidebar'
@@ -20,7 +19,6 @@ const Layout =async ({children}:{children:React.ReactNode}) => {
     <div className='flex h-screen overflow-hidden'>
       <ChatSidebar user={session?.user} chats={chats} />
         <main className='flex-1 overflow-hidden'>
-          <ModeToggle />
             {children}
         </main>
 

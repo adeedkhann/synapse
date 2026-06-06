@@ -124,7 +124,7 @@ export async function deleteChat(chatId:string) {
 
        const chat = await prisma.chat.delete({
         where:{id:chatId,userId:user?.id},
-        include:{message:true}
+        include:{messages:true}
        })
 
        if(!chat){

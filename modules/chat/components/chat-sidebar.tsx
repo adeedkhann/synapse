@@ -6,6 +6,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { UserButton } from "@/modules/authentication/components/userButton";
+import DeleteChatModel from "@/components/delete-chat-model";
+import { ModeToggle } from "@/components/mode-toggle";
 
 import {
   Sheet,
@@ -86,8 +88,8 @@ export const ChatSidebarContent = ({
   collapsed?: boolean;
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
-
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState("");
 
   // Filter chats by search query if the user types anything
   const filteredChats = chats.filter((chat) =>
@@ -96,14 +98,12 @@ export const ChatSidebarContent = ({
 
   const groupedChats = groupChatsByDate(filteredChats);
 
-  const [selectedId , setSelectedId] = useState("")
-
-const handleDelete = (e:React.MouseEvent ,chatId:string)=>{
-  e.preventDefault();
-  e.stopPropagation();
-  setSelectedId(chatId)
-  
-}
+const handleDelete = (e: React.MouseEvent, chatId: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setSelectedId(chatId);
+    setIsModalOpen(true);
+  };
 
 
 
@@ -114,13 +114,14 @@ const handleDelete = (e:React.MouseEvent ,chatId:string)=>{
 
 
   return (
-    <div className="flex h-full flex-col bg-background">
+    <div className="flex h-full min-h-0 flex-col bg-background">
       
       {/* New Chat */}
       <div className="p-3">
         
+        <Link href={"/"}>
         <Button
-
+          
           variant="secondary"
           className={`w-full ${
             collapsed ? "justify-center px-0" : "justify-start gap-2"
@@ -129,6 +130,7 @@ const handleDelete = (e:React.MouseEvent ,chatId:string)=>{
           <PlusIcon className="size-4 shrink-0" />
           {!collapsed && <span>New Chat</span>}
         </Button>
+        </Link>
       </div>
 
       {!collapsed && (
@@ -147,7 +149,7 @@ const handleDelete = (e:React.MouseEvent ,chatId:string)=>{
           </div>
 
           {/* Dynamic Chats */}
-          <div className="flex-1 overflow-y-auto px-2">
+          <div className="flex-1 overflow-y-auto px-2 scrollbar-hide">
             {Object.keys(groupedChats).length === 0 ? (
               <p className="p-4 text-center text-xs text-muted-foreground">
                 No chats found
@@ -201,10 +203,11 @@ const handleDelete = (e:React.MouseEvent ,chatId:string)=>{
                           </DropdownMenuTrigger>
 
                           <DropdownMenuContent align="end">
-                            <DropdownMenuItem className="text-destructive">
-                              <Trash
-                              onClick={()=>handleDelete(chat.id)}
-                              className="mr-2 size-4" />
+                            <DropdownMenuItem
+                              className="text-destructive"
+                              onClick={(e) => handleDelete(e as any, chat.id)}
+                            >
+                              <Trash className="mr-2 size-4" />
                               Delete
                             </DropdownMenuItem>
                           </DropdownMenuContent>
@@ -220,7 +223,22 @@ const handleDelete = (e:React.MouseEvent ,chatId:string)=>{
       )}
 
       {/* Footer */}
-      <div className="mt-auto border-t border-border p-3">
+      <div className="mt-auto border-t border-border p-3 space-y-3">
+        {/* Theme Toggle */}
+        {collapsed ? (
+          <div className="flex justify-center">
+            <ModeToggle />
+          </div>
+        ) : (
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-muted-foreground">
+              Theme
+            </span>
+            <ModeToggle />
+          </div>
+        )}
+
+        {/* Account */}
         {collapsed ? (
           <div className="flex justify-center">
             <UserButton user={user} />
@@ -234,6 +252,13 @@ const handleDelete = (e:React.MouseEvent ,chatId:string)=>{
           </div>
         )}
       </div>
+
+      {/* Delete Chat Modal */}
+      <DeleteChatModel
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        chatId={selectedId}
+      />
     </div>
   );
 };

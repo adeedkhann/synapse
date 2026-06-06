@@ -28,8 +28,9 @@ const models = data?.models ?? [];
   useEffect(() => {
     if (initialMessage) {
       setMessage(initialMessage);
+      onMessageChange?.("")
     }
-  }, [initialMessage]);
+  }, [initialMessage ,onMessageChange]);
 
   useEffect(() => {
     if (!selectedModelId && models.length > 0) {
@@ -73,7 +74,7 @@ const selectedModel = useMemo(
   };
 
   return (
-  <div className="w-full max-w-3xl px-3 sm:px-4">
+  <div className="w-full max-w-4xl px-3 sm:px-4">
     <div
       className="
         relative

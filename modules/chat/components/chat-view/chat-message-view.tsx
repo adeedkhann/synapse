@@ -18,38 +18,40 @@ const ChatMessageView = ({ user }) => {
   return (
     <div
       className="
-        min-h-screen
         w-full
-        px-4
-        py-6
-        sm:px-6
-        lg:px-8
+        h-full
+        flex
+        flex-col
       "
     >
       <div
         className="
-          mx-auto
+          flex-1
+          overflow-y-auto
+          scrollbar-hide
           flex
-          min-h-[calc(100vh-3rem)]
-          w-full
-          max-w-5xl
           flex-col
           items-center
           justify-center
-          gap-6
-          sm:gap-8
-          md:gap-10
+          px-4
+          py-6
+          sm:px-6
+          lg:px-8
         "
       >
         <ChatWelcomeTabs
           username={user?.name}
           onMessageSelect={handleMessageSelect}
         />
+      </div>
 
-        <ChatMessageForm
-          initialMessage={selectedMessage}
-          onMessageChange={handleMessageChange}
-        />
+      <div className="shrink-0 px-4 py-4 sm:px-6 lg:px-8 bg-background flex justify-center">
+        <div className="w-full max-w-4xl">
+          <ChatMessageForm
+            initialMessage={selectedMessage}
+            onMessageChange={handleMessageChange}
+          />
+        </div>
       </div>
     </div>
   );
