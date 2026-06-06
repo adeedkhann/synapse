@@ -32,7 +32,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-// 1. Define the Chat Type matching Prisma Model
+// 1. Define the User type matching session shape
+interface UserInfo {
+  id: string;
+  name: string;
+  email: string;
+  image?: string | null;
+  emailVerified?: boolean;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+}
+
+// 2. Define the Chat Type matching Prisma Model
 interface ChatItem {
   id: string;
   title: string;
@@ -83,7 +94,7 @@ export const ChatSidebarContent = ({
   chats = [], // Default to an empty array to prevent undefined runtime errors
   collapsed = false,
 }: {
-  user: React.ReactNode;
+  user?: UserInfo | null;
   chats?: ChatItem[];
   collapsed?: boolean;
 }) => {
@@ -267,7 +278,7 @@ const ChatSidebar = ({
   user,
   chats = [], // Accepting the dynamic array from your parent page component
 }: {
-  user: React.ReactNode;
+  user?: UserInfo | null;
   chats?: ChatItem[];
 }) => {
   const [mobileOpen, setMobileOpen] = useState(false);

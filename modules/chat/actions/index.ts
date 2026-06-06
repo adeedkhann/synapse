@@ -124,12 +124,13 @@ export async function deleteChat(chatId:string) {
 
        const chat = await prisma.chat.delete({
         where:{id:chatId,userId:user?.id},
-        include:{messages:true}
        })
 
        if(!chat){
         return {success:false,message:"chat not found"}
        }
+
+       revalidatePath("/" , "layout")
 
        return {success:true }
 

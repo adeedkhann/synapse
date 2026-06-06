@@ -5,11 +5,17 @@ import { useDeleteChat } from "@/modules/chat/hooks/use-chats";
 import React from "react";
 import { toast } from "sonner";
 
+interface DeleteChatModelProps {
+    isModalOpen: boolean;
+    setIsModalOpen: (open: boolean) => void;
+    chatId: string;
+}
+
 const DeleteChatModel = ({
     isModalOpen,
     setIsModalOpen,
     chatId,
-}) => {
+}: DeleteChatModelProps) => {
 
     const {mutateAsync ,isPending} = useDeleteChat(chatId);
 
