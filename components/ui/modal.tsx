@@ -9,7 +9,20 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from '@/components/ui/button'
 
-
+interface ModalProps {
+  children?: React.ReactNode;
+  title: string;
+  description?: string;
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit?: () => void;
+  submitText?: string;
+  cancelText?: string;
+  showFooter?: boolean;
+  submitVariant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
+  size?: string;
+  className?: string;
+}
 
 const Modal= ({
   children,
@@ -24,7 +37,7 @@ const Modal= ({
   submitVariant = "default",
   size,
   className = ''
-}) => {
+}: ModalProps) => {
   const handleSubmit = () => {
     if (onSubmit) {
       onSubmit()

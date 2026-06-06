@@ -250,17 +250,19 @@ const handleDelete = (e: React.MouseEvent, chatId: string) => {
         )}
 
         {/* Account */}
-        {collapsed ? (
-          <div className="flex justify-center">
-            <UserButton user={user} />
-          </div>
-        ) : (
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-muted-foreground">
-              Account
-            </span>
-            <UserButton user={user} />
-          </div>
+        {user && (
+          collapsed ? (
+            <div className="flex justify-center">
+              <UserButton user={user} />
+            </div>
+          ) : (
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-muted-foreground">
+                Account
+              </span>
+              <UserButton user={user} />
+            </div>
+          )
         )}
       </div>
 
