@@ -1,3 +1,4 @@
+
 # Synapse
 
 Synapse is a full-stack AI chat application that lets users converse with multiple large language models through a single, unified interface. It is built on Next.js 16, streams responses in real time via the Vercel AI SDK, and routes all model requests through OpenRouter so users can switch between providers without managing separate API keys.
@@ -8,13 +9,10 @@ Synapse is a full-stack AI chat application that lets users converse with multip
 
 <!-- Add your screenshots below. Replace the placeholder paths with the actual image paths. -->
 
-![Screenshot 1](screenshots/screenshot-1.png)
-
-![Screenshot 2](screenshots/screenshot-2.png)
-
-![Screenshot 3](screenshots/screenshot-3.png)
-
-![Screenshot 4](screenshots/screenshot-4.png)
+<img width="960" height="436" alt="Screenshot 2026-06-07 170206" src="https://github.com/user-attachments/assets/ac90192c-434a-4dac-a9f7-c9cfb469ad1e" />
+<img width="960" height="436" alt="Screenshot 2026-06-07 170236" src="https://github.com/user-attachments/assets/b8c6cb53-2f32-4620-8d8c-e3774e2c2806" />
+<img width="960" height="436" alt="Screenshot 2026-06-07 170247" src="https://github.com/user-attachments/assets/543f27cc-2cd4-403e-beaa-2545fdd3efd5" />
+<img width="960" height="436" alt="Screenshot 2026-06-07 170227" src="https://github.com/user-attachments/assets/169e4cdb-15f2-4da5-99ef-5c594d34ad89" />
 
 ---
 
